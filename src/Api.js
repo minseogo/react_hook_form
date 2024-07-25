@@ -5,6 +5,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [targetnum, setNumber] = useState(1);
   
 
   useEffect(() => {
@@ -36,7 +37,7 @@ function App() {
       <h1>Users</h1>
       <div>
         {uniqueAlbumIds.map(albumId => (
-            <button key={albumId} value={albumId}>
+            <button key={albumId} value={albumId} onClick={()=>{setNumber(albumId);}}>
               Album {albumId}
             </button>
           ))
@@ -51,7 +52,7 @@ function App() {
         <p>Loading...</p>
       ) : (
         <ul style={{display: "flex", flexWrap: "wrap"}}>
-          {users.filter(item => item.albumId === 1).map(user => (
+          {users.filter(item => item.albumId === targetnum).map(user => (
             <li key={user.id} style={{width: "33%", listStyle: "none", padding: "0"}}>
               <h2 style={{fontSize: "16px"}}>{user.title}</h2>
               <img src={user.thumbnailUrl} alt={user.title} />
